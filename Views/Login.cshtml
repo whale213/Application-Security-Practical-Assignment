@@ -1,0 +1,61 @@
+﻿@page
+@model AppSecPracticalAssignment_223981B.Views.LoginModel
+@{
+}
+
+<head>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<div class="container mt-5">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-sm-12 col-md-12 col-lg-4">
+            <h1 class="mb-3">Login</h1>
+
+            <form method="post">
+
+                <div class="mb-3">
+                    <label class="form-label" asp-for="LModel.Email">Email Address</label>
+                    <input type="text" asp-for="LModel.Email" class="form-control" />
+                    <span asp-validation-for="LModel.Email" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" asp-for="LModel.Password">Password</label>
+                    <input type="password" asp-for="LModel.Password" class="form-control" />
+                    <span asp-validation-for="LModel.Password" class="text-danger"></span>
+                    <div id="passwordStrengthMessage" class="text-muted"></div>
+
+                </div>
+
+                <div class="mb-3 form-check">
+                    <input type="checkbox" asp-for="LModel.RememberMe" class="form-check-input" />
+                    <label class="form-check-label" asp-for="LModel.RememberMe">Remember Me?</label>
+                </div>
+
+                <div class="mb-3">
+                    <div class="g-recaptcha" data-sitekey="6Ld4ZWQpAAAAAA4_fAkUPCHzih2CPMZX16yPsZQi"></div>
+                    <span class="text-danger" id="recaptchaError"></span>
+                </div>
+                <div class="mb-3">
+                    <button id="submitBtn" type="submit" class="btn btn-primary" onclick="submitForm()">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function submitForm() {
+        var response = grecaptcha.getResponse();
+
+        if (response.length === 0) {
+            document.getElementById("recaptchaError").innerHTML = "Please complete the reCAPTCHA.";
+            return false;
+        } else {
+            document.getElementById("recaptchaError").innerHTML = "";
+            document.getElementById("loginForm").submit();
+            return true;
+        }
+    }
+</script>

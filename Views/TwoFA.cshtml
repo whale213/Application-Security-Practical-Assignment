@@ -1,0 +1,27 @@
+﻿@page "/TwoFactorAuthentication"
+@model AppSecPracticalAssignment_223981B.Views.TwoFactorAuthenticationModel
+@{
+}
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-sm-12 col-md-12 col-lg-4">
+            <h1 class="mb-3">Two Factor Authentication</h1>
+
+            <form method="post">
+
+                <div class="mb-3">
+                    <label class="form-label" for="TwoFACode">Code</label>
+                    <input type="text" id="TwoFACode" name="TwoFACode" class="form-control" />
+                    <span class="text-danger">@ViewData["TwoFACodeError"]</span>
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Authenticate</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

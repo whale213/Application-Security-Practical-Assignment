@@ -1,0 +1,50 @@
+﻿@page
+@model AppSecPracticalAssignment_223981B.Views.IndexModel
+@inject IHttpContextAccessor contxt;
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4">@ViewData["FullName"]</h1>
+    <h1 class="display-4">@ViewData["DecryptedCreditCard"]</h1>
+    <h1 class="mb-3">Profile Photo</h1>
+    <div>
+        <a asp-page="/ChangePassword" class="btn btn-primary">Change Password</a>
+    </div>
+
+
+
+    <div class="col-md-6">
+        @if (Model.UserInfo.Photo != null)
+        {
+            <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.UserInfo.Photo)" alt="Profile Photo" class="img-fluid" />
+        }
+
+
+    </div>
+
+    @{
+        if (contxt.HttpContext.Session.GetString("Username") == null)
+        {
+            <text>
+                <script>
+
+
+                    // Display an alert informing the user about the session timeout
+                    alert('Your session has timed out. Please log in again.');
+
+                    // Redirect the user to the login page after showing the alert
+                    window.location.href = '/Login';
+
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1000);
+
+
+
+                </script>
+            </text>
+        }
+    }
